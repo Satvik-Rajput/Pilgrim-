@@ -14,9 +14,11 @@
 
 /* ── 1. Hero (886:21130) ── */
 .ev-hero {
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 227px;
+  z-index: 0;
 }
 .ev-hero-img {
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -26,12 +28,67 @@
   background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 40%);
 }
 .ev-back {
-  position: absolute; top: env(safe-area-inset-top, 12px); left: 8px;
-  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; z-index: 1;
+  position: absolute; top: calc(env(safe-area-inset-top, 8px) + 8px); left: 4px;
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; z-index: 2;
+  transition: opacity 0.2s ease;
+}
+.ev-back.is-hidden { opacity: 0; pointer-events: none; }
+.ev-back-circle {
+  width: 40px; height: 40px; border-radius: 50%; background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.08);
+  display: flex; align-items: center; justify-content: center;
 }
 
-/* ── 2. Body ── */
-.ev-body { background: #fff; padding-bottom: 40px; }
+/* ── Sticky top nav (scrolled state) ── */
+.ev-topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: #fff;
+  transform: translateY(-100%);
+  transition: transform 0.25s ease;
+  will-change: transform;
+}
+.ev-topnav.is-visible {
+  transform: translateY(0);
+}
+.ev-topnav-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
+}
+.ev-topnav-back {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.ev-topnav-title {
+  flex: 1; min-width: 0;
+  font: 700 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  color: var(--text-primary);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.ev-topnav-divider {
+  height: 1px; background: var(--stroke-weaker); margin: 0; border: none;
+}
+
+/* ── 2. Body – tray that overlaps hero ── */
+.ev-body {
+  background: #fff;
+  padding-bottom: 80px;
+  border-radius: 24px 24px 0 0;
+  margin-top: -24px;
+  position: relative;
+  z-index: 1;
+  overflow-x: hidden;
+}
 
 /* ── 3. Title meta (886:21135) ── */
 .ev-title-meta {
@@ -64,6 +121,7 @@
 
 /* ── 4. Purpose list (886:21152) ── */
 .ev-purpose-list { display: flex; flex-direction: column; gap: 12px; padding: 24px 0; }
+#evTagItems { display: flex; flex-direction: column; gap: 12px; }
 .ev-purpose-item { display: flex; gap: 16px; align-items: flex-start; padding: 0 16px; }
 .ev-purpose-icon { width: 40px; height: 40px; flex-shrink: 0; object-fit: contain; }
 .ev-purpose-icon-round { border-radius: 8px; object-fit: cover; }
@@ -76,7 +134,9 @@
 .ev-section-last { padding-bottom: 24px; }
 .ev-section-title {
   font: 700 22px/28px var(--font-family); letter-spacing: -0.4px;
-  color: var(--text-primary); margin: 0; padding: 12px 16px; min-height: 28px;
+  color: var(--text-primary); margin: 0; padding: 12px 16px;
+  min-height: 64px; box-sizing: border-box;
+  display: flex; align-items: center;
 }
 .ev-section-subtitle {
   font: 400 14px/20px var(--font-family); letter-spacing: -0.09px;
@@ -85,7 +145,7 @@
 
 /* ── 5. About (886:21185) ── */
 .ev-about-text {
-  padding: 0 16px 24px;
+  padding: 0 16px;
   font: 400 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-primary);
 }
 .ev-about-text p { margin: 0 0 8px; }
@@ -93,14 +153,19 @@
 
 /* ── 6. Ray / Ask anything (886:21189) ── */
 .ev-ray { padding: 12px 0 24px; }
-.ev-ray-nested { padding-top: 12px; }
+.ev-ray-nested { padding: 12px 0 0; }
 .ev-ray-title {
   font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
-  color: var(--text-primary); margin: 0; padding: 4px 16px 6px;
+  color: var(--text-primary); margin: 0; padding: 4px 16px;
+  min-height: 32px; box-sizing: border-box;
+  display: flex; align-items: center;
+}
+.ev-ai-wrap {
+  padding: 6px 16px;
 }
 .ev-ai-bar {
   display: flex; align-items: center; gap: 12px;
-  margin: 0 16px; padding: 0 12px;
+  padding: 0 12px;
   border: 1px solid #285bf3; border-radius: 999px;
   height: 44px;
 }
@@ -111,14 +176,16 @@
 }
 .ev-ai-arrow { flex-shrink: 0; }
 
-.ev-chips-area { padding: 0 16px; }
-.ev-chips-row { display: flex; gap: 12px; margin-top: 0; }
+.ev-chips-area { padding: 0; }
+.ev-chips-row {
+  display: flex; gap: 12px; padding: 0 16px;
+  min-height: 40px; align-items: center;
+}
 .ev-chip {
   display: inline-flex; align-items: center; gap: 4px;
   padding: 6px 12px; border: 1px solid var(--stroke-weaker); border-radius: 999px;
   font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
   color: var(--text-primary); background: #fff; white-space: nowrap;
-  height: 40px; box-sizing: border-box;
 }
 
 /* ── 7. Itinerary (886:21217) ── */
@@ -130,14 +197,14 @@
   font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
   color: var(--text-primary); white-space: nowrap;
 }
-.ev-itin-line-short { width: 1px; height: 12px; background: var(--stroke-weaker); margin-left: 14px; }
+.ev-itin-line-short { width: 1px; height: 12px; border-left: 1px solid var(--stroke-weaker); margin-left: 13px; }
 .ev-itin-step { display: flex; gap: 6px; }
 .ev-itin-rail { display: flex; flex-direction: column; align-items: center; width: 28px; flex-shrink: 0; }
-.ev-itin-rail .ev-itin-line { width: 1px; height: 18px; background: var(--stroke-weaker); flex-shrink: 0; }
+.ev-itin-rail .ev-itin-line { width: 1px; height: 18px; border-left: 1px solid var(--stroke-weaker); flex-shrink: 0; }
 .ev-itin-rail .ev-itin-line-grow { flex: 1; min-height: 8px; height: auto; }
 .ev-itin-icon { width: 24px; height: 24px; flex-shrink: 0; }
 .ev-itin-content { flex: 1; min-width: 0; padding: 12px 0; }
-.ev-itin-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.ev-itin-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .ev-itin-detail { flex: 1; min-width: 0; }
 .ev-itin-bold { font: 700 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-primary); margin: 0; }
 .ev-itin-sub { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-primary); margin: 0; }
@@ -146,22 +213,24 @@
 
 /* ── 8. Bus cards (990:16834) ── */
 .ev-bus-carousel {
-  display: flex; gap: 8px; padding: 0 16px; overflow-x: auto;
-  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  display: flex; gap: 8px; overflow-x: auto; padding: 8px 16px;
+  scroll-snap-type: x mandatory; scroll-padding-left: 16px;
+  -webkit-overflow-scrolling: touch;
 }
 .ev-bus-carousel::-webkit-scrollbar { display: none; }
 .ev-bus-card {
   flex-shrink: 0; width: 328px;
   background: #fff; border-radius: 20px; box-shadow: var(--shadow-card);
   padding: 16px; display: flex; flex-direction: column; gap: 12px;
-  scroll-snap-align: start;
 }
-.ev-bus-top { display: flex; align-items: center; justify-content: space-between; }
-.ev-bus-logo { height: 28px; width: auto; }
+.ev-bus-top { display: flex; align-items: center; justify-content: flex-end; }
 .ev-bus-deal {
   font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
-  color: var(--text-primary); background: #fede92; padding: 4px 8px;
+  color: var(--text-primary); background: #fede92; padding: 4px 10px;
   border-radius: 4px; white-space: nowrap;
+  background-image:
+    radial-gradient(circle at 0 50%, #fff 3px, transparent 3px),
+    radial-gradient(circle at 100% 50%, #fff 3px, transparent 3px);
 }
 .ev-bus-schedule { display: flex; justify-content: space-between; align-items: flex-start; }
 .ev-bus-left {}
@@ -170,17 +239,33 @@
 .ev-bus-sep { width: 12px; height: 1.5px; background: var(--stroke-weaker); border-radius: 1px; display: inline-block; }
 .ev-bus-meta { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; }
 .ev-bus-price-block { text-align: right; }
-.ev-bus-price { font: 700 16px/22px var(--font-family); letter-spacing: -0.18px; color: var(--text-primary); margin: 0; }
+.ev-bus-price-old {
+  font: 400 14px/20px var(--font-family); letter-spacing: -0.09px;
+  color: var(--text-secondary); margin: 0; text-decoration: line-through;
+  display: inline;
+}
+.ev-bus-price {
+  font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-primary); margin: 0; display: inline; margin-left: 2px;
+}
 .ev-bus-onwards { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-tertiary); margin: 0; }
 .ev-bus-operator { display: flex; justify-content: space-between; align-items: center; }
 .ev-bus-op-name { font: 700 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-primary); margin: 0; }
 .ev-bus-op-type { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; }
+.ev-bus-rating-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+  background: #e2eee3; border-radius: 8px; padding: 2px; overflow: hidden;
+}
 .ev-bus-rating {
   display: inline-flex; align-items: center; gap: 2px;
   background: #007b28; color: #fff; font: 700 12px/16px var(--font-family);
   letter-spacing: 0.01px; padding: 2px 6px; border-radius: 6px;
 }
 .ev-bus-rating span { font-size: 10px; }
+.ev-bus-rating-count {
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary); text-align: center;
+}
 .ev-rating-low { background: #d63941; }
 .ev-bus-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .ev-bus-tag {
@@ -189,25 +274,27 @@
 }
 
 /* ── CTA button ── */
-.ev-cta-wrap { padding: 16px 16px 0; }
+.ev-cta-wrap { padding: 8px 16px 24px; }
 .ev-cta-btn {
   width: 100%; height: 48px; border: none; border-radius: 999px; cursor: pointer;
   font: 700 14px/20px var(--font-family); letter-spacing: -0.09px;
   color: var(--text-primary); text-align: center;
+  text-decoration: none; display: flex; align-items: center; justify-content: center;
+  box-sizing: border-box;
 }
 .ev-cta-secondary { background: var(--fill-brand-secondary); }
 
 /* ── 9. Hotel cards (991:19123) ── */
 .ev-hotel-carousel {
-  display: flex; gap: 8px; padding: 0 16px; overflow-x: auto;
-  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  display: flex; gap: 8px; padding: 8px 16px; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .ev-hotel-carousel::-webkit-scrollbar { display: none; }
 .ev-hotel-card {
   flex-shrink: 0; width: 307px;
-  background: #fff; border-radius: 20px; box-shadow: var(--shadow-card);
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 0.5px 2px rgba(29,29,29,0.19), 0 2px 4px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.08);
   overflow: hidden; display: flex; flex-direction: column;
-  scroll-snap-align: start;
 }
 .ev-hotel-img-wrap { position: relative; width: 100%; height: 180px; }
 .ev-hotel-img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -217,25 +304,28 @@
   padding: 4px 8px; border-radius: 8px;
   font: 500 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-primary);
 }
-.ev-hotel-rating-row { display: flex; align-items: center; gap: 8px; padding: 12px 16px 0; }
+.ev-hotel-rating-row { display: flex; align-items: center; gap: 6px; padding: 12px 16px 0; }
 .ev-hotel-reviews { font: 400 12px/16px var(--font-family); color: var(--text-secondary); }
 .ev-hotel-verdict { font: 400 12px/16px var(--font-family); color: var(--text-secondary); }
-.ev-hotel-area { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; padding: 4px 16px 0; }
-.ev-hotel-price-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 4px 16px 0; }
+.ev-hotel-area-row { display: flex; align-items: center; gap: 6px; padding: 8px 16px 0; }
+.ev-hotel-area { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; }
+.ev-hotel-deal { font: 500 12px/16px var(--font-family); letter-spacing: 0.01px; color: #007b28; margin: 0; margin-left: auto; }
+.ev-hotel-old-price { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; text-decoration: line-through; }
+.ev-hotel-price-row { display: flex; justify-content: space-between; align-items: baseline; padding: 2px 16px 0; }
 .ev-hotel-name { font: 700 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-primary); margin: 0; }
-.ev-hotel-price { text-align: right; }
 .ev-hotel-amount { font: 700 16px/22px var(--font-family); letter-spacing: -0.18px; color: var(--text-primary); margin: 0; }
-.ev-hotel-tax { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; }
-.ev-hotel-dist { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; padding: 2px 16px 0; }
+.ev-hotel-dist-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 2px 16px 0; }
+.ev-hotel-dist { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; flex: 1; min-width: 0; }
+.ev-hotel-tax { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-secondary); margin: 0; text-align: right; flex-shrink: 0; }
 .ev-hotel-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 16px 16px; }
 .ev-hotel-tag {
-  border: 1px solid var(--stroke-weaker); padding: 4px 8px; border-radius: 8px;
+  padding: 4px 8px; border-radius: 8px;
   font: 500 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-primary);
-  background: #fff;
+  background: #f2f2f8;
 }
 
 /* ── 10. Rules / Things to know (886:21333) ── */
-.ev-rules { padding: 0 0 24px; display: flex; flex-direction: column; gap: 12px; }
+.ev-rules { padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .ev-rule {
   display: flex; align-items: flex-start; gap: 8px; padding: 0 16px;
   font: 400 16px/22px var(--font-family); letter-spacing: -0.18px; color: var(--text-primary);
@@ -272,8 +362,11 @@
 .ev-gallery-indicator { display: flex; justify-content: center; padding: 8px 0; }
 .ev-gallery-track { width: 66px; height: 4px; background: var(--stroke-weaker); border-radius: 8px; position: relative; }
 .ev-gallery-puck { width: 24px; height: 4px; background: var(--fill-brand); border-radius: 8px; position: absolute; left: 0; top: 0; }
+.ev-gallery-wrap {
+  position: relative;
+}
 .ev-gallery-viewall {
-  position: relative; float: right; margin: -40px 16px 24px 0;
+  position: absolute; bottom: 12px; right: 16px;
   background: rgba(255,255,255,0.73); backdrop-filter: blur(3px);
   border: none; border-radius: 999px; padding: 10px 16px;
   font: 700 14px/20px var(--font-family); letter-spacing: -0.09px;
@@ -282,12 +375,14 @@
 
 /* ── 13. More events (886:21380) ── */
 .ev-more-carousel {
-  display: flex; gap: 8px; padding: 0 16px; overflow-x: auto;
+  display: flex; gap: 8px; padding: 8px 16px 24px; overflow-x: auto;
+  scroll-snap-type: x mandatory; scroll-padding-left: 16px;
   -webkit-overflow-scrolling: touch;
 }
 .ev-more-carousel::-webkit-scrollbar { display: none; }
+.ev-more-card-link { text-decoration: none; color: inherit; flex-shrink: 0; }
 .ev-more-card {
-  flex-shrink: 0; width: 328px; display: flex;
+  flex-shrink: 0; width: 300px; display: flex;
   background: #fff; border-radius: 16px; box-shadow: var(--shadow-card); overflow: hidden;
 }
 .ev-more-card-img { width: 104px; flex-shrink: 0; padding: 4px 0 4px 4px; }
@@ -298,35 +393,86 @@
 }
 .ev-more-card-date { font: 400 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-primary); margin: 0; padding: 0 16px; }
 .ev-more-card-info { padding: 0 16px; }
-.ev-more-card-name { font: 700 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-primary); margin: 0; }
+.ev-more-card-name {
+  font: 700 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-primary); margin: 0;
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
 .ev-more-card-loc { font: 400 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-secondary); margin: 0; }
 .ev-more-card-meta .ev-divider { margin: 0; }
 .ev-more-card-msg { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-primary); margin: 0; padding: 0 16px; }
 .ev-more-card-tags { display: flex; flex-wrap: wrap; gap: 4px; padding: 0 16px; }
 .ev-more-tag {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 4px 8px; border-radius: 8px; height: 24px; box-sizing: border-box;
+  display: inline-flex; align-items: center; gap: 0;
+  padding: 0 8px 0 6px; border-radius: 8px; height: 24px; box-sizing: border-box;
   font: 500 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-primary);
 }
-.ev-more-tag-wish { background: #f3d1c8; }
-.ev-more-tag-finance { background: #9eeb9e; }
+.ev-more-tag img { width: 16px; height: 16px; flex-shrink: 0; margin-right: 4px; }
 
 /* ── 14. Nearby pilgrims (886:21386) ── */
+.ev-nearby-header {
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: 72px; padding: 12px 16px; box-sizing: border-box;
+}
+.ev-nearby-title {
+  font: 700 22px/28px var(--font-family); letter-spacing: -0.4px;
+  color: var(--text-primary); margin: 0;
+}
+.ev-nearby-subtitle {
+  font: 400 14px/20px var(--font-family); letter-spacing: -0.09px;
+  color: var(--text-secondary); margin: 0;
+}
 .ev-nearby-carousel {
-  display: flex; gap: 16px; padding: 12px 16px 0;
+  display: flex; gap: 16px; padding: 0 16px;
   overflow-x: auto; -webkit-overflow-scrolling: touch;
 }
 .ev-nearby-carousel::-webkit-scrollbar { display: none; }
 .ev-nearby-card { flex-shrink: 0; width: 175px; display: flex; flex-direction: column; gap: 12px; }
 .ev-nearby-img {
-  position: relative; width: 175px; height: 125px;
+  width: 175px; height: 125px;
   border-radius: 16px; overflow: hidden;
 }
 .ev-nearby-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ev-nearby-dist {
-  position: absolute; bottom: 8px; left: 8px;
-  background: #fff; padding: 4px 8px; border-radius: 8px;
-  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-primary);
-}
+.ev-nearby-text { display: flex; flex-direction: column; }
 .ev-nearby-name { font: 700 14px/20px var(--font-family); letter-spacing: -0.09px; color: var(--text-primary); margin: 0; }
 .ev-nearby-stat { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-primary); margin: 0; }
+.ev-nearby-travel { font: 400 12px/16px var(--font-family); letter-spacing: 0.01px; color: var(--text-primary); margin: 0; }
+
+/* ── 15. Sticky bottom CTA bar (886:21767) ── */
+.ev-sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 20;
+  display: flex; gap: 8px; padding: 16px;
+  background: #fff; border-top: 1px solid var(--stroke-weaker);
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.08), 0 -2px 4px rgba(0,0,0,0.08);
+}
+.ev-sticky-btn {
+  flex: 1; height: 48px; min-height: 48px;
+  border-radius: 999px; border: none; cursor: pointer;
+  font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
+  display: flex; align-items: center; justify-content: center;
+  white-space: nowrap; padding: 0 24px; box-sizing: border-box;
+}
+.ev-sticky-primary { background: #d63941; color: #fdfdfd; text-decoration: none; }
+.ev-sticky-outline {
+  background: #fff; color: var(--text-primary);
+  border: 1px solid #4b4b4b; text-decoration: none;
+}
+
+/* ── 16. Ask Ray floating button ── */
+.ev-ask-ray {
+  position: fixed; bottom: 96px; right: 16px; z-index: 21;
+  display: inline-flex; align-items: center; gap: 0;
+  padding: 4px; border-radius: 999px;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  background-image: linear-gradient(96.33deg, #285bf3 8.92%, #7e42eb 45.23%, #c82169 102.59%);
+  text-decoration: none;
+}
+.ev-ask-ray-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; padding: 8px; box-sizing: border-box;
+}
+.ev-ask-ray-icon svg { width: 24px; height: 24px; flex-shrink: 0; }
+.ev-ask-ray-text {
+  font: 400 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: #fdfdfd; height: 40px; display: flex; align-items: center;
+  padding: 0 8px 0 0; white-space: nowrap;
+}

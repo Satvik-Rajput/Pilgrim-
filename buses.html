@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Buses from Bangalore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="buses.css" />
+  <script src="event-data.js"></script>
+</head>
+<body>
+  <div class="phone-frame" style="background:#f2f2f8;">
+
+    <!-- Top nav -->
+    <div class="bs-topnav">
+      <div class="bs-topnav-bar">
+        <button class="bs-back" onclick="history.back()" aria-label="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="#1d1d1d"/></svg>
+        </button>
+        <div class="bs-route-info">
+          <p class="bs-route-title" id="bsTitle">Bangalore → Chennai</p>
+          <p class="bs-route-sub" id="bsSub">5 buses</p>
+        </div>
+        <div class="bs-date-trailing">
+          <div class="bs-date-pill" id="bsDateDay">26 Jun</div>
+          <span class="bs-date-weekday" id="bsDateWeek">Fri</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deals carousel -->
+    <div class="bs-deals">
+      <div class="bs-deal-card bs-deal-orange">
+        <span class="bs-deal-tag">Last min.</span>
+        <p class="bs-deal-text">Limited time steal deals</p>
+      </div>
+      <div class="bs-deal-card bs-deal-teal">
+        <span class="bs-deal-tag">Try new</span>
+        <p class="bs-deal-text">Up to ₹150 off with new operator</p>
+      </div>
+      <div class="bs-deal-card bs-deal-blue">
+        <span class="bs-deal-tag">Early buy</span>
+        <p class="bs-deal-text">Buy early to get special prices</p>
+      </div>
+      <div class="bs-deal-card bs-deal-pink">
+        <span class="bs-deal-tag">Return trip</span>
+        <p class="bs-deal-text">Get discount on return trip</p>
+      </div>
+      <div class="bs-deal-card bs-deal-purple">
+        <span class="bs-deal-tag">Exclusive</span>
+        <p class="bs-deal-text">Hand picked deals for you</p>
+      </div>
+      <div class="bs-deal-card bs-deal-rose">
+        <span class="bs-deal-tag">Women deal</span>
+        <p class="bs-deal-text">Exclusive deals for women</p>
+      </div>
+    </div>
+
+    <!-- Filter chips -->
+    <div class="bs-filters">
+      <div class="bs-filter-row">
+        <span class="bs-chip"><svg class="bs-chip-icon" viewBox="0 0 24 24" fill="none"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" fill="#1d1d1d"/></svg> Filter &amp; Sort</span>
+        <span class="bs-chip">Primo</span>
+        <span class="bs-chip">AC</span>
+        <span class="bs-chip">Sleeper</span>
+        <span class="bs-chip">Single Seat</span>
+        <span class="bs-chip">Seater</span>
+        <span class="bs-chip">Non AC</span>
+        <span class="bs-chip">18:00 – 23:59</span>
+        <span class="bs-chip">High Rated Buses</span>
+        <span class="bs-chip">Live Tracking</span>
+      </div>
+      <div class="bs-filter-row">
+        <span class="bs-chip">Single seats</span>
+        <span class="bs-chip">Seater</span>
+        <span class="bs-chip">Single Seat</span>
+        <span class="bs-chip">Seater</span>
+        <span class="bs-chip">Non AC</span>
+        <span class="bs-chip">18:00 – 23:59</span>
+        <span class="bs-chip">High Rated Buses</span>
+        <span class="bs-chip">Live Tracking</span>
+      </div>
+    </div>
+
+    <!-- Bus cards -->
+    <div class="bs-list" id="bsList">
+
+      <div class="bs-card">
+        <div class="bs-card-deal-row"><span class="bs-card-deal">Last min. <b>10% OFF</b></span></div>
+        <div class="bs-card-time-row">
+          <div class="bs-time-block">
+            <div class="bs-time-line"><span class="bs-time-bold">21:45</span><span class="bs-time-sep"></span><span class="bs-time-end">09:00</span></div>
+            <div class="bs-duration"><span>7h 30m</span><span class="bs-dur-dot"></span><span>11 Seats</span> <span class="bs-seats-warn">(2 Single)</span></div>
+          </div>
+          <div class="bs-price-block">
+            <p class="bs-price">₹949</p>
+            <p class="bs-onwards">Onwards</p>
+          </div>
+        </div>
+        <div class="bs-card-op-row">
+          <div>
+            <p class="bs-op-name">Ganesh Tourists</p>
+            <p class="bs-op-type">A/C Sleeper (2+1)</p>
+          </div>
+          <div class="bs-rating-box">
+            <div class="bs-rating-badge"><span class="bs-rating-star">★ 4.4</span></div>
+            <span class="bs-rating-count">1.2k</span>
+          </div>
+        </div>
+        <div class="bs-card-tags"><span class="bs-tag">Clean Bus</span><span class="bs-tag">Safety +</span><span class="bs-tag">Free cancellation</span></div>
+      </div>
+
+      <div class="bs-card">
+        <div class="bs-card-deal-row"><span class="bs-card-deal">Last min. <b>10% OFF</b></span></div>
+        <div class="bs-card-time-row">
+          <div class="bs-time-block">
+            <div class="bs-time-line"><span class="bs-time-bold">22:00</span><span class="bs-time-sep"></span><span class="bs-time-end">09:00</span></div>
+            <div class="bs-duration"><span>7h 30m</span><span class="bs-dur-dot"></span><span>11 Seats</span> <span class="bs-seats-warn">(2 Single)</span></div>
+          </div>
+          <div class="bs-price-block">
+            <p class="bs-price">₹799</p>
+            <p class="bs-onwards">Onwards</p>
+          </div>
+        </div>
+        <div class="bs-card-op-row">
+          <div>
+            <p class="bs-op-name">Orange Tours</p>
+            <p class="bs-op-type">A/C Sleeper (2+1)</p>
+          </div>
+          <div class="bs-rating-box">
+            <div class="bs-rating-badge"><span class="bs-rating-star">★ 4.4</span></div>
+            <span class="bs-rating-count">980</span>
+          </div>
+        </div>
+        <div class="bs-card-tags"><span class="bs-tag">Clean Bus</span><span class="bs-tag">Safety +</span><span class="bs-tag">Free cancellation</span></div>
+      </div>
+
+      <div class="bs-card">
+        <div class="bs-card-deal-row"><span class="bs-card-deal">Last min. <b>10% OFF</b></span></div>
+        <div class="bs-card-time-row">
+          <div class="bs-time-block">
+            <div class="bs-time-line"><span class="bs-time-bold">18:00</span><span class="bs-time-sep"></span><span class="bs-time-end">09:00</span></div>
+            <div class="bs-duration"><span>7h 30m</span><span class="bs-dur-dot"></span><span>11 Seats</span> <span class="bs-seats-warn">(2 Single)</span></div>
+          </div>
+          <div class="bs-price-block">
+            <p class="bs-price">₹649</p>
+            <p class="bs-onwards">Onwards</p>
+          </div>
+        </div>
+        <div class="bs-card-op-row">
+          <div>
+            <p class="bs-op-name">Kaveri Express</p>
+            <p class="bs-op-type">A/C Sleeper (2+1)</p>
+          </div>
+          <div class="bs-rating-box">
+            <div class="bs-rating-badge"><span class="bs-rating-star">★ 4.4</span></div>
+            <span class="bs-rating-count">2.4k</span>
+          </div>
+        </div>
+        <div class="bs-card-tags"><span class="bs-tag">Clean Bus</span><span class="bs-tag">Safety +</span><span class="bs-tag">Free cancellation</span></div>
+      </div>
+
+      <div class="bs-card">
+        <div class="bs-card-deal-row"><span class="bs-card-deal">Last min. <b>10% OFF</b></span></div>
+        <div class="bs-card-time-row">
+          <div class="bs-time-block">
+            <div class="bs-time-line"><span class="bs-time-bold">17:45</span><span class="bs-time-sep"></span><span class="bs-time-end">09:00</span></div>
+            <div class="bs-duration"><span>7h 30m</span><span class="bs-dur-dot"></span><span>11 Seats</span> <span class="bs-seats-warn">(2 Single)</span></div>
+          </div>
+          <div class="bs-price-block">
+            <p class="bs-price">₹899</p>
+            <p class="bs-onwards">Onwards</p>
+          </div>
+        </div>
+        <div class="bs-card-op-row">
+          <div>
+            <p class="bs-op-name">Sea Bird Travels</p>
+            <p class="bs-op-type">A/C Sleeper (2+1)</p>
+          </div>
+          <div class="bs-rating-box">
+            <div class="bs-rating-badge"><span class="bs-rating-star">★ 4.4</span></div>
+            <span class="bs-rating-count">640</span>
+          </div>
+        </div>
+        <div class="bs-card-tags"><span class="bs-tag">Clean Bus</span><span class="bs-tag">Safety +</span><span class="bs-tag">Free cancellation</span></div>
+      </div>
+
+      <div class="bs-card">
+        <div class="bs-card-deal-row"><span class="bs-card-deal">Last min. <b>10% OFF</b></span></div>
+        <div class="bs-card-time-row">
+          <div class="bs-time-block">
+            <div class="bs-time-line"><span class="bs-time-bold">20:15</span><span class="bs-time-sep"></span><span class="bs-time-end">09:00</span></div>
+            <div class="bs-duration"><span>6h 45m</span><span class="bs-dur-dot"></span><span>8 Seats</span> <span class="bs-seats-warn">(3 Single)</span></div>
+          </div>
+          <div class="bs-price-block">
+            <p class="bs-price">₹1,099</p>
+            <p class="bs-onwards">Onwards</p>
+          </div>
+        </div>
+        <div class="bs-card-op-row">
+          <div>
+            <p class="bs-op-name">SRS Travels</p>
+            <p class="bs-op-type">A/C Sleeper (2+1)</p>
+          </div>
+          <div class="bs-rating-box">
+            <div class="bs-rating-badge"><span class="bs-rating-star">★ 4.2</span></div>
+            <span class="bs-rating-count">890</span>
+          </div>
+        </div>
+        <div class="bs-card-tags"><span class="bs-tag">Clean Bus</span><span class="bs-tag">Safety +</span><span class="bs-tag">Free cancellation</span></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var eventId = parseInt(params.get('id'), 10);
+    var ev = (typeof EVENTS !== 'undefined' && !isNaN(eventId)) ? EVENTS[eventId] : null;
+
+    if (ev) {
+      var city = ev.location.split(',')[0].trim();
+      document.getElementById('bsTitle').textContent = 'Bangalore → ' + city;
+      document.getElementById('bsSub').textContent = '5 buses';
+      document.title = 'Buses to ' + city;
+
+      var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var parts = ev.date.split(' ');
+      var eventDate = new Date(parseInt(parts[2],10), MONTHS.indexOf(parts[1]), parseInt(parts[0],10));
+      var prev = new Date(eventDate);
+      prev.setDate(prev.getDate() - 1);
+
+      document.getElementById('bsDateDay').textContent =
+        prev.getDate().toString().padStart(2,'0') + ' ' + MONTHS[prev.getMonth()];
+      document.getElementById('bsDateWeek').textContent = DAYS[prev.getDay()];
+    }
+  })();
+  </script>
+</body>
+</html>

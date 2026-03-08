@@ -475,6 +475,9 @@ body:has(.pilgrim-page) {
   color: inherit;
   display: block;
 }
+.pilgrim-card-link.is-hidden {
+  display: none;
+}
 
 /* No-results message */
 .pilgrim-no-results {

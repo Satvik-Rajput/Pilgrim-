@@ -1274,11 +1274,12 @@ body {
   bottom: 12px;
   left: 16px;
   right: 16px;
-  font: 700 20px/26px var(--font-family);
-  letter-spacing: -0.33px;
+  font: 700 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
   color: #fff;
   margin: 0;
   z-index: 1;
+  text-align: center;
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;

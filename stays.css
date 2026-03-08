@@ -1,0 +1,261 @@
+/* Hourly stays SRP page – Figma 1017:11396 */
+
+/* ── Top nav ── */
+.hs-topnav {
+  position: sticky; top: 0; z-index: 10;
+  background: #fff;
+  border-bottom: 0.33px solid #e6e6e6;
+}
+.hs-topnav-bar {
+  display: flex; align-items: center; gap: 4px;
+  padding: 8px 4px;
+}
+.hs-back {
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: none; border: none; cursor: pointer; padding: 0;
+}
+.hs-back svg { width: 24px; height: 24px; }
+.hs-route-info {
+  flex: 1; min-width: 0; height: 48px;
+  display: flex; flex-direction: column; justify-content: center;
+  overflow: hidden;
+}
+.hs-route-title {
+  font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-primary); margin: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.hs-route-sub {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: rgba(29,29,29,0.64); margin: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.hs-share {
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: none; border: none; cursor: pointer; padding: 0;
+}
+.hs-share svg { width: 24px; height: 24px; }
+
+/* ── Feature cards / promo banner ── */
+.hs-promo {
+  display: flex; gap: 8px; padding: 16px;
+  background: #fff; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-bottom: 1px solid #e6e6e6;
+}
+.hs-promo::-webkit-scrollbar { display: none; }
+
+.hs-feat-card {
+  flex-shrink: 0; width: 136px; height: 96px;
+  border-radius: 16px; padding: 12px;
+  box-sizing: border-box; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.08);
+}
+.hs-feat-purple {
+  background: #6831c0;
+}
+.hs-feat-label {
+  font: 400 14px/20px var(--font-family); color: rgba(255,255,255,0.8);
+  margin: 0;
+}
+.hs-feat-price {
+  font: 700 28px/32px var(--font-family); color: #fff;
+  margin: 0; letter-spacing: -0.4px;
+}
+.hs-feat-gold {
+  background: radial-gradient(ellipse at 80% 75%, #f7c14e, #fbd070, #fede92, #fbd070, #f7c14e);
+}
+.hs-feat-gold-content {
+  display: flex; flex-direction: column; gap: 0;
+}
+.hs-feat-tag {
+  display: inline-flex; align-items: center; align-self: flex-start;
+  background: #fff; border-radius: 4px; padding: 2px 4px;
+  font: 500 12px/16px var(--font-family);
+  color: var(--text-primary);
+}
+.hs-feat-gold-title {
+  font: 700 16px/24px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-primary); margin: 0;
+}
+.hs-feat-gold-count {
+  font: 400 12px/16px var(--font-family);
+  color: var(--text-primary); margin: 0;
+}
+.hs-feat-cta {
+  position: absolute; bottom: 0; right: 0;
+  display: flex; align-items: center; justify-content: center;
+  height: 24px; padding: 0 8px;
+  background: rgba(50,50,50,0.2);
+  border-top-left-radius: 12px;
+}
+.hs-feat-cta svg { width: 16px; height: 16px; }
+
+/* ── Filters ── */
+.hs-filters {
+  display: flex; gap: 6px; padding: 8px 16px;
+  background: #fff; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.hs-filters::-webkit-scrollbar { display: none; }
+.hs-chip {
+  flex-shrink: 0; min-height: 32px; min-width: 48px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 6px 12px; border-radius: 8px;
+  border: 1px solid #b0b0b0; background: #fff;
+  font: 500 14px/20px var(--font-family); letter-spacing: -0.09px;
+  color: var(--text-primary); white-space: nowrap;
+  box-sizing: border-box; cursor: pointer;
+}
+.hs-chip svg { width: 16px; height: 16px; flex-shrink: 0; }
+.hs-chip-arrow { width: 12px; height: 12px; flex-shrink: 0; margin-left: 2px; }
+
+/* ── Hotel cards list ── */
+.hs-list {
+  display: flex; flex-direction: column; gap: 16px;
+  padding: 16px 0; background: #f2f2f8;
+}
+
+.hs-card {
+  background: #fff; border-radius: 24px;
+  box-shadow: 0 1px 2px -1px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  overflow: hidden;
+  padding-top: 16px; padding-bottom: 4px;
+}
+
+/* Image section */
+.hs-card-banner {
+  padding: 0 16px;
+}
+.hs-card-img-wrap {
+  border-radius: 16px; overflow: hidden; position: relative;
+}
+.hs-social-proof {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 4px 8px;
+  background: #c1f1c4;
+}
+.hs-social-proof svg { width: 16px; height: 16px; flex-shrink: 0; }
+.hs-social-proof span {
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary);
+}
+.hs-card-img {
+  width: 100%; height: 180px; object-fit: cover; display: block;
+}
+.hs-card-img-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(29,29,29,0.6) 100%);
+  pointer-events: none;
+}
+.hs-guest-photos {
+  position: absolute; bottom: 12px; right: 12px;
+  background: rgba(255,255,255,0.85); border-radius: 8px;
+  padding: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.08);
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary); white-space: nowrap;
+}
+
+/* Meta section */
+.hs-card-meta {
+  padding: 12px 16px; display: flex; flex-direction: column; gap: 8px;
+}
+
+/* Rating + review row */
+.hs-rating-row {
+  display: flex; gap: 4px; align-items: center;
+}
+.hs-rating-wrap {
+  display: flex; align-items: center; gap: 0;
+  background: #e1f1e3; border-radius: 8px; padding: 2px;
+}
+.hs-rating-badge {
+  display: flex; align-items: center; justify-content: center; gap: 0;
+  background: #007b28; border-radius: 6px;
+  min-width: 44px; height: 20px; padding: 0 2px;
+  box-sizing: border-box;
+}
+.hs-rating-star {
+  font: 700 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: #fdfdfd; white-space: nowrap;
+}
+.hs-rating-count {
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary); padding: 0 4px;
+}
+.hs-review-tag {
+  display: flex; align-items: center; justify-content: center;
+  height: 24px; padding: 0 8px; border-radius: 8px;
+  background: #e1f1e3;
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary);
+}
+
+/* Name + price row */
+.hs-info-row {
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.hs-hotel-info { flex: 1; min-width: 0; overflow: hidden; }
+.hs-hotel-area {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: rgba(29,29,29,0.69); margin: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.hs-hotel-name {
+  font: 700 14px/20px var(--font-family); letter-spacing: -0.09px;
+  color: var(--text-primary); margin: 0; height: 22px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.hs-hotel-distance {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: rgba(29,29,29,0.69); margin: 0;
+}
+
+.hs-price-area {
+  flex-shrink: 0; text-align: right;
+  display: flex; flex-direction: column; align-items: flex-end;
+}
+.hs-price-discount-row {
+  display: flex; gap: 4px; align-items: center; justify-content: flex-end;
+}
+.hs-deal-badge {
+  display: inline-flex; align-items: center;
+  background: #e4ecfd; border-radius: 4px 0 0 4px;
+  padding: 0 4px; height: 16px;
+  font: 500 11px/16px var(--font-family); letter-spacing: 0.05px;
+  color: var(--text-primary); white-space: nowrap;
+}
+.hs-strike-price {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: rgba(29,29,29,0.69); text-decoration: line-through; margin: 0;
+}
+.hs-price {
+  font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-primary); margin: 0;
+}
+.hs-tax {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: rgba(29,29,29,0.69); margin: 0;
+}
+.hs-per-night {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: rgba(29,29,29,0.69); margin: 0;
+}
+
+/* Tags row */
+.hs-tags {
+  display: flex; flex-wrap: wrap; gap: 4px;
+}
+.hs-tag {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 24px; padding: 0 8px; border-radius: 8px;
+  background: #f2f2f8; border-top: 1px solid #2c5ef6;
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary); box-sizing: border-box;
+}
+.hs-tag-plain {
+  border-top: none;
+}

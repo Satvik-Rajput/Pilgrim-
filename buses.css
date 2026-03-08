@@ -1,0 +1,223 @@
+/* Buses SRP page – Figma 1017:9973 */
+
+/* ── Top nav ── */
+.bs-topnav {
+  position: sticky; top: 0; z-index: 10;
+  background: #fff;
+  border-bottom: 0.33px solid #e6e6e6;
+}
+.bs-topnav-bar {
+  display: flex; align-items: center; gap: 4px;
+  padding: 8px 4px;
+}
+.bs-back {
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: none; border: none; cursor: pointer; padding: 0;
+}
+.bs-back svg { width: 24px; height: 24px; }
+.bs-route-info {
+  flex: 1; min-width: 0;
+  height: 48px; display: flex; flex-direction: column;
+  justify-content: center; overflow: hidden;
+}
+.bs-route-title {
+  font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-primary); margin: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.bs-route-sub {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: rgba(29,29,29,0.64); margin: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.bs-date-trailing {
+  flex-shrink: 0; height: 48px;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 0 12px;
+}
+.bs-date-pill {
+  display: flex; align-items: center; justify-content: center;
+  height: 32px; padding: 0 8px; border-radius: 24px;
+  background: #fde6e5;
+  font: 700 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary); white-space: nowrap;
+}
+.bs-date-weekday {
+  font: 500 11px/16px var(--font-family); letter-spacing: 0.05px;
+  color: rgba(29,29,29,0.46); margin: 0; text-align: center;
+}
+
+/* ── Deals carousel ── */
+.bs-deals {
+  display: flex; gap: 8px; padding: 16px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  background: #fff;
+  border-bottom: 0.5px solid #e6e6e6;
+}
+.bs-deals::-webkit-scrollbar { display: none; }
+
+.bs-deal-card {
+  flex-shrink: 0; width: 140px; height: 100px;
+  border-radius: 16px; padding: 8px 10px;
+  box-sizing: border-box; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.bs-deal-tag {
+  display: inline-flex; align-items: center;
+  background: #fff; border-radius: 4px; padding: 2px 0;
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary); align-self: flex-start;
+}
+.bs-deal-text {
+  font: 700 12px/14px var(--font-family); letter-spacing: -0.072px;
+  color: var(--text-primary); margin: 0; width: 96px;
+}
+
+.bs-deal-orange { background: #fedac8; }
+.bs-deal-teal { background: #e2ecec; }
+.bs-deal-blue { background: #e4ecfd; }
+.bs-deal-pink { background: #fde6e5; }
+.bs-deal-purple { background: #ebdbff; }
+.bs-deal-rose { background: #fed7e7; }
+
+/* ── Filter chips ── */
+.bs-filters {
+  padding: 4px 16px;
+  display: flex; flex-direction: column;
+  background: #fff;
+}
+.bs-filter-row {
+  display: flex; gap: 6px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.bs-filter-row::-webkit-scrollbar { display: none; }
+.bs-chip {
+  flex-shrink: 0; min-height: 32px; min-width: 48px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 6px 12px; border-radius: 8px;
+  border: 1px solid #b0b0b0;
+  background: #fff; cursor: pointer;
+  font: 500 14px/20px var(--font-family); letter-spacing: -0.09px;
+  color: var(--text-primary); white-space: nowrap;
+  box-sizing: border-box; margin: 8px 0;
+}
+.bs-chip-icon { width: 20px; height: 20px; flex-shrink: 0; margin-right: 4px; }
+
+/* ── Bus cards list ── */
+.bs-list {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 10px 16px 100px;
+}
+
+.bs-card {
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.08);
+  padding: 16px; overflow: hidden;
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+/* Deal tag row */
+.bs-card-deal-row {
+  display: flex; justify-content: flex-end;
+}
+.bs-card-deal {
+  display: inline-flex; align-items: center;
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary); background: #fede92; padding: 4px 10px;
+  border-radius: 4px;
+  background-image:
+    radial-gradient(circle at 0 50%, #fff 3px, transparent 3px),
+    radial-gradient(circle at 100% 50%, #fff 3px, transparent 3px);
+}
+.bs-card-deal b { font-weight: 700; }
+
+/* Time + price row */
+.bs-card-time-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.bs-time-block {}
+.bs-time-line {
+  display: flex; align-items: center; gap: 6px;
+}
+.bs-time-bold {
+  font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-primary);
+}
+.bs-time-sep {
+  width: 12px; height: 1.5px; border-radius: 1px;
+  background: var(--stroke-weaker);
+}
+.bs-time-end {
+  font: 400 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-primary);
+}
+.bs-duration {
+  display: flex; align-items: center; gap: 6px;
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-secondary);
+}
+.bs-dur-dot {
+  width: 2px; height: 2px; border-radius: 50%;
+  background: var(--text-secondary);
+}
+.bs-seats-warn { color: #b14b00; }
+
+.bs-price-block { text-align: right; }
+.bs-price {
+  font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-primary); margin: 0;
+}
+.bs-price-old {
+  font: 700 16px/22px var(--font-family); letter-spacing: -0.18px;
+  color: var(--text-secondary); text-decoration: line-through;
+  margin: 0; display: none;
+}
+.bs-onwards {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: rgba(29,29,29,0.26); margin: 0;
+}
+
+/* Operator + rating row */
+.bs-card-op-row {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.bs-op-name {
+  font: 700 14px/20px var(--font-family); letter-spacing: -0.09px;
+  color: var(--text-primary); margin: 0;
+}
+.bs-op-type {
+  font: 400 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-secondary); margin: 0;
+}
+.bs-rating-box {
+  display: flex; flex-direction: column; align-items: center;
+  background: #e2eee3; border-radius: 8px; padding: 2px;
+  gap: 0;
+}
+.bs-rating-badge {
+  display: flex; align-items: center; gap: 2px;
+  background: #007b28; border-radius: 6px;
+  padding: 1px 4px; min-width: 46px; min-height: 20px;
+  justify-content: center; box-sizing: border-box;
+}
+.bs-rating-star {
+  font: 700 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: #fdfdfd;
+}
+.bs-rating-count {
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary);
+}
+
+/* Tags row */
+.bs-card-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.bs-tag {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 24px; padding: 0 8px; border-radius: 8px;
+  background: #e4ecfd;
+  font: 500 12px/16px var(--font-family); letter-spacing: 0.01px;
+  color: var(--text-primary); box-sizing: border-box;
+}

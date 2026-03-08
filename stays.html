@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Hourly Stays</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="stays.css" />
+  <script src="event-data.js"></script>
+</head>
+<body>
+  <div class="phone-frame" style="background:#f2f2f8;">
+
+    <!-- Top nav -->
+    <div class="hs-topnav">
+      <div class="hs-topnav-bar">
+        <button class="hs-back" onclick="history.back()" aria-label="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="#1d1d1d"/></svg>
+        </button>
+        <div class="hs-route-info">
+          <p class="hs-route-title" id="hsCity">Bengaluru</p>
+          <p class="hs-route-sub" id="hsSub">08 Oct - 09 Oct · 1 Room · 2 Guests</p>
+        </div>
+        <button class="hs-share" aria-label="Edit">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="#1d1d1d"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Feature cards / promo banner -->
+    <div class="hs-promo">
+      <div class="hs-feat-card hs-feat-purple">
+        <p class="hs-feat-label">Under</p>
+        <p class="hs-feat-price">₹999</p>
+        <span class="hs-feat-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" fill="#fff"/></svg></span>
+      </div>
+      <div class="hs-feat-card hs-feat-gold">
+        <div class="hs-feat-gold-content">
+          <span class="hs-feat-tag">Exclusive</span>
+          <p class="hs-feat-gold-title">redBus deals</p>
+        </div>
+        <p class="hs-feat-gold-count" id="hsHotelCount">1093 hotels</p>
+        <span class="hs-feat-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" fill="rgba(29,29,29,0.5)"/></svg></span>
+      </div>
+    </div>
+
+    <!-- Filter chips -->
+    <div class="hs-filters">
+      <span class="hs-chip">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z" fill="#1d1d1d"/></svg>
+        Sort &amp; Filter
+      </span>
+      <span class="hs-chip">Customer rating <svg class="hs-chip-arrow" viewBox="0 0 24 24" fill="none"><path d="M7 10l5 5 5-5z" fill="#1d1d1d"/></svg></span>
+      <span class="hs-chip">Local ID</span>
+      <span class="hs-chip">Price range</span>
+      <span class="hs-chip">Couple friendly</span>
+      <span class="hs-chip">Free cancellation</span>
+    </div>
+
+    <!-- Hotel cards -->
+    <div class="hs-list" id="hsList"></div>
+
+  </div>
+
+  <script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var eventId = parseInt(params.get('id'), 10);
+    var ev = (typeof EVENTS !== 'undefined' && !isNaN(eventId)) ? EVENTS[eventId] : null;
+
+    var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var city = 'Bengaluru';
+    var temple = 'Arunachaleswarar Temple';
+    var checkIn = '08 Oct';
+    var checkOut = '09 Oct';
+
+    if (ev) {
+      city = ev.location.split(',')[0].trim();
+      temple = ev.temple;
+      document.title = 'Hourly stays near ' + temple;
+      document.getElementById('hsCity').textContent = city;
+
+      var parts = ev.date.split(' ');
+      var eventDate = new Date(parseInt(parts[2],10), MONTHS.indexOf(parts[1]), parseInt(parts[0],10));
+      var d1 = new Date(eventDate); d1.setDate(d1.getDate() - 1);
+      var d2 = new Date(eventDate);
+      checkIn = d1.getDate().toString().padStart(2,'0') + ' ' + MONTHS[d1.getMonth()];
+      checkOut = d2.getDate().toString().padStart(2,'0') + ' ' + MONTHS[d2.getMonth()];
+      document.getElementById('hsSub').textContent = checkIn + ' - ' + checkOut + ' · 1 Room · 2 Guests';
+    }
+
+    var HOTEL_IMAGES = [
+      'https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?w=600&q=80',
+      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&q=80',
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80',
+      'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=600&q=80'
+    ];
+    var HOTEL_NAMES = [
+      'Surya Residency', 'Hotel Grand Palace', 'Sri Krishna Inn', 'Temple View Lodge'
+    ];
+    var HOTEL_RATINGS = ['4.4', '4.2', '4.6', '3.9'];
+    var HOTEL_REVIEWS = ['99', '64', '142', '38'];
+    var HOTEL_REVIEW_TAGS = ['Super clean', 'Great value', 'Super clean', 'Nice location'];
+    var HOTEL_BOOKINGS = ['101', '78', '132', '56'];
+    var HOTEL_DISTANCES = ['1.3', '2.1', '0.8', '3.5'];
+    var HOTEL_ORIG_PRICES = ['1800', '2200', '1500', '1600'];
+    var HOTEL_PRICES = ['1440', '1760', '1200', '1120'];
+    var HOTEL_DISCOUNTS = ['20', '20', '20', '30'];
+    var HOTEL_TAX = ['120', '150', '100', '95'];
+    var HOTEL_PHOTOS = ['12', '8', '15', '6'];
+
+    var list = document.getElementById('hsList');
+    list.innerHTML = '';
+
+    for (var i = 0; i < 4; i++) {
+      var card = document.createElement('div');
+      card.className = 'hs-card';
+      card.innerHTML =
+        '<div class="hs-card-banner">' +
+          '<div class="hs-card-img-wrap">' +
+            '<div class="hs-social-proof">' +
+              '<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" fill="#007b28"/></svg>' +
+              '<span>' + HOTEL_BOOKINGS[i] + ' bookings in last 7 days</span>' +
+            '</div>' +
+            '<div style="position:relative">' +
+              '<img class="hs-card-img" src="' + HOTEL_IMAGES[i] + '" alt="' + HOTEL_NAMES[i] + '" />' +
+              '<div class="hs-card-img-overlay"></div>' +
+              '<div class="hs-guest-photos">' + HOTEL_PHOTOS[i] + ' Guest photos</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="hs-card-meta">' +
+          '<div class="hs-rating-row">' +
+            '<div class="hs-rating-wrap">' +
+              '<div class="hs-rating-badge"><span class="hs-rating-star">★ ' + HOTEL_RATINGS[i] + '</span></div>' +
+              '<span class="hs-rating-count">' + HOTEL_REVIEWS[i] + '</span>' +
+            '</div>' +
+            '<div class="hs-review-tag">Guests say: ' + HOTEL_REVIEW_TAGS[i] + '</div>' +
+          '</div>' +
+          '<div class="hs-info-row">' +
+            '<div class="hs-hotel-info">' +
+              '<p class="hs-hotel-area">' + city + ' · Hostel bed</p>' +
+              '<p class="hs-hotel-name">' + HOTEL_NAMES[i] + '</p>' +
+              '<p class="hs-hotel-distance">' + HOTEL_DISTANCES[i] + ' km drive to ' + temple + '</p>' +
+            '</div>' +
+            '<div class="hs-price-area">' +
+              '<div class="hs-price-discount-row">' +
+                '<span class="hs-deal-badge">' + HOTEL_DISCOUNTS[i] + '% off</span>' +
+                '<span class="hs-strike-price">₹' + HOTEL_ORIG_PRICES[i] + '</span>' +
+              '</div>' +
+              '<p class="hs-price">₹' + HOTEL_PRICES[i] + '</p>' +
+              '<p class="hs-tax">+₹' + HOTEL_TAX[i] + ' tax &amp; fees</p>' +
+              '<p class="hs-per-night">Per night</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="hs-tags">' +
+            '<span class="hs-tag">Pay at hotel</span>' +
+            '<span class="hs-tag hs-tag-plain">Free cancellation</span>' +
+            '<span class="hs-tag hs-tag-plain">Free breakfast</span>' +
+          '</div>' +
+        '</div>';
+      list.appendChild(card);
+    }
+  })();
+  </script>
+</body>
+</html>
