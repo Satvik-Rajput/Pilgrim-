@@ -181,6 +181,7 @@
   letter-spacing: 0.01px; padding: 2px 6px; border-radius: 6px;
 }
 .ev-bus-rating span { font-size: 10px; }
+.ev-rating-low { background: #d63941; }
 .ev-bus-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .ev-bus-tag {
   background: #f7e7ea; padding: 4px 8px; border-radius: 8px;
