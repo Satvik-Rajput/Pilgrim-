@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pilgrim – Bus tickets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <header class="header">
+      <div class="header-row">
+        <button type="button" class="lang-btn" aria-label="Language">
+          <img src="globe.svg" alt="" class="lang-btn-icon" width="16" height="16" />
+          <span class="lang-btn-text">English</span>
+          <img src="expand_more.svg" alt="" class="lang-btn-icon" width="16" height="16" />
+        </button>
+        <div class="header-actions">
+          <button type="button" class="profile-pill" aria-label="Profile">
+            <img src="my_account.svg" alt="" width="16" height="16" />
+          </button>
+        </div>
+      </div>
+      <nav class="lobs">
+        <a href="#" class="lob-item" aria-current="page">
+          <span class="lob-icon-wrap"><img src="Logo=redBus.svg" alt="" class="lob-img" /></span>
+          <span class="lob-label">Bus</span>
+        </a>
+        <a href="#" class="lob-item">
+          <span class="lob-icon-wrap"><img src="Logo=rail.svg" alt="" class="lob-img" /></span>
+          <span class="lob-label">Train</span>
+        </a>
+        <a href="#" class="lob-item">
+          <span class="lob-icon-wrap"><img src="Logo.svg" alt="" class="lob-img lob-img-hotel" /></span>
+          <span class="lob-label">Hotels</span>
+        </a>
+        <a href="#" class="lob-item">
+          <span class="lob-badge"><span class="lob-badge-inner">20% OFF</span></span>
+          <span class="lob-icon-wrap"><img src="Logo Master.svg" alt="" class="lob-img" /></span>
+          <span class="lob-label">Metro</span>
+        </a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="search-widget">
+        <h2 class="section-title">Bus tickets</h2>
+        <div class="search-card">
+          <div class="usp-banner">ZERO convenience fee*</div>
+          <div class="search-fields">
+            <div class="search-row">
+              <span class="row-icon"><img src="boarding_point.svg" alt="" width="24" height="24" /></span>
+              <div class="row-labels">
+                <span class="label-small">From</span>
+                <span class="label-value">Bangalore</span>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="search-row">
+              <span class="row-icon"><img src="dropping_point.svg" alt="" width="24" height="24" /></span>
+              <div class="row-labels">
+                <span class="label-small">To</span>
+                <span class="label-value">Chennai</span>
+              </div>
+            </div>
+            <button type="button" class="swap-btn" aria-label="Swap From and To">
+              <img src="swap_vertical.svg" alt="" width="24" height="24" />
+            </button>
+            <div class="divider"></div>
+            <div class="search-row search-row-date">
+              <span class="row-icon"><img src="date_range.svg" alt="" width="24" height="24" /></span>
+              <div class="row-labels">
+                <span class="label-small">Date of Journey</span>
+                <span class="label-value">Sun 10-Mar</span>
+              </div>
+              <div class="date-btns">
+                <button type="button" class="pill-btn pill-btn-selected">Today</button>
+                <button type="button" class="pill-btn">Tomorrow</button>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="search-row search-row-woman">
+              <span class="row-icon"><img src="beauty%201.png" alt="Booking for woman" width="24" height="24" class="icon-woman" /></span>
+              <span class="woman-label">Booking for woman</span>
+              <button type="button" class="toggle" id="womanToggle" role="switch" aria-checked="false">
+                <span class="toggle-puck"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn-search">
+          <img src="search.svg" alt="" class="btn-search-icon" width="24" height="24" />
+          <span>Search buses</span>
+        </button>
+      </section>
+
+      <!-- Offer section – Figma 886:21870 -->
+      <section class="offers">
+        <div class="offers-header">
+          <h2 class="offers-title">Offers for you</h2>
+          <a href="#" class="link-view-more">View more</a>
+        </div>
+        <div class="chips">
+          <button type="button" class="chip chip-selected">Bus</button>
+          <button type="button" class="chip">Train</button>
+          <button type="button" class="chip">Hotels</button>
+          <button type="button" class="chip">Metro</button>
+        </div>
+        <div class="carousel-wrap">
+          <div class="carousel">
+            <article class="offer-card offer-card-1">
+              <div class="offer-card-inner">
+                <div class="offer-card-pad">
+                  <div class="offer-card-top">
+                    <span class="card-badge">Bus</span>
+                    <div class="offer-card-body">
+                      <h3 class="card-title">Save ₹300 on bus ticket</h3>
+                      <p class="card-subtitle">Valid till 5 Mar</p>
+                    </div>
+                  </div>
+                  <button type="button" class="card-cta">
+                    <img src="local_offer.svg" alt="" width="24" height="24" />
+                    <span>Festive300</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="offer-card offer-card-1">
+              <div class="offer-card-inner">
+                <div class="offer-card-pad">
+                  <div class="offer-card-top">
+                    <span class="card-badge">Bus</span>
+                    <div class="offer-card-body">
+                      <h3 class="card-title">Save ₹300 on bus ticket</h3>
+                      <p class="card-subtitle">Valid till 5 Mar</p>
+                    </div>
+                  </div>
+                  <button type="button" class="card-cta">
+                    <img src="local_offer.svg" alt="" width="24" height="24" />
+                    <span>Festive300</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="offer-card offer-card-1">
+              <div class="offer-card-inner">
+                <div class="offer-card-pad">
+                  <div class="offer-card-top">
+                    <span class="card-badge">Bus</span>
+                    <div class="offer-card-body">
+                      <h3 class="card-title">Save ₹300 on bus ticket</h3>
+                      <p class="card-subtitle">Valid till 5 Mar</p>
+                    </div>
+                  </div>
+                  <button type="button" class="card-cta">
+                    <img src="local_offer.svg" alt="" width="24" height="24" />
+                    <span>Festive300</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="offer-card offer-card-1">
+              <div class="offer-card-inner">
+                <div class="offer-card-pad">
+                  <div class="offer-card-top">
+                    <span class="card-badge">Bus</span>
+                    <div class="offer-card-body">
+                      <h3 class="card-title">Save ₹300 on bus ticket</h3>
+                      <p class="card-subtitle">Valid till 5 Mar</p>
+                    </div>
+                  </div>
+                  <button type="button" class="card-cta">
+                    <img src="local_offer.svg" alt="" width="24" height="24" />
+                    <span>Festive300</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="carousel-dots">
+          <span class="dot dot-active" aria-current="true">1/4</span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main">
+      <a href="#" class="nav-tab nav-tab-active">
+        <img src="home.svg" alt="" class="nav-icon" width="24" height="24" />
+        <span>Home</span>
+      </a>
+      <a href="#" class="nav-tab">
+        <img src="offer_percentage.svg" alt="" class="nav-icon" width="24" height="24" />
+        <span>Offers</span>
+      </a>
+      <a href="pilgrim.html" class="nav-tab">
+        <img src="darshan.svg" alt="" class="nav-icon" width="24" height="24" />
+        <span>Pilgrim</span>
+      </a>
+      <a href="#" class="nav-tab">
+        <img src="help.svg" alt="" class="nav-icon" width="24" height="24" />
+        <span>Help</span>
+      </a>
+      <a href="#" class="nav-tab">
+        <img src="bullet_points.svg" alt="" class="nav-icon" width="24" height="24" />
+        <span>Bookings</span>
+      </a>
+    </nav>
+  </div>
+  <!-- Pilgrim intro popup -->
+  <div class="pilgrim-popup-overlay" id="pilgrimPopup" hidden>
+    <div class="pilgrim-popup-scrim"></div>
+    <div class="pilgrim-popup-spacer"></div>
+    <div class="pilgrim-popup-container">
+      <div class="pilgrim-popup-card">
+        <div class="pilgrim-popup-hero">
+          <div class="pilgrim-popup-slide is-active" data-slide="0">
+            <img src="Pilgrim images/Chamundeshwari temple Maysuru-optimized.webp" alt="" class="pilgrim-popup-hero-img" />
+            <div class="pilgrim-popup-hero-gradient"></div>
+            <p class="pilgrim-popup-hero-text">Ugadi Festival at Sri Chamundeshwari Temple</p>
+          </div>
+          <div class="pilgrim-popup-slide" data-slide="1">
+            <img src="Pilgrim images/Kapaleeshwarar Temple Chennai-optimized.webp" alt="" class="pilgrim-popup-hero-img" />
+            <div class="pilgrim-popup-hero-gradient"></div>
+            <p class="pilgrim-popup-hero-text">Panguni Uthiram at Kapaleeshwarar Temple</p>
+          </div>
+          <div class="pilgrim-popup-slide" data-slide="2">
+            <img src="Pilgrim images/Brahmotsavam at Tirumala Venkateswara Temple-optimized.webp" alt="" class="pilgrim-popup-hero-img" />
+            <div class="pilgrim-popup-hero-gradient"></div>
+            <p class="pilgrim-popup-hero-text">Brahmotsavam at Tirumala Venkateswara Temple</p>
+          </div>
+          <div class="pilgrim-popup-slide" data-slide="3">
+            <img src="Pilgrim images/Aadi Krithigai at Arunachaleswarar Temple-optimized.webp" alt="" class="pilgrim-popup-hero-img" />
+            <div class="pilgrim-popup-hero-gradient"></div>
+            <p class="pilgrim-popup-hero-text">Karthigai Deepam at Arunachaleswarar Temple</p>
+          </div>
+          <button type="button" class="pilgrim-popup-close" id="pilgrimPopupClose" aria-label="Close">
+            <svg class="pilgrim-popup-close-x" width="16" height="16" viewBox="0 0 15.5 15.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.22.22a.75.75 0 011.06 1.06L8.81 7.75l6.47 6.47a.75.75 0 01-1.06 1.06L7.75 8.81l-6.47 6.47a.75.75 0 01-1.06-1.06L6.69 7.75.22 1.28A.75.75 0 011.28.22L7.75 6.69 14.22.22z" fill="#1D1D1D"/>
+            </svg>
+          </button>
+        </div>
+        <div class="pilgrim-popup-text">
+          <p class="pilgrim-popup-greeting">Hello, Satvik</p>
+          <p class="pilgrim-popup-headline">Discover spiritual journeys from Bangalore</p>
+        </div>
+        <div class="pilgrim-popup-list">
+          <div class="pilgrim-popup-list-item">
+            <img src="date_range.svg" alt="" class="pilgrim-popup-list-icon" />
+            <span>Auspicious dates &amp; festivals</span>
+          </div>
+          <div class="pilgrim-popup-list-item">
+            <img src="temple.svg" alt="" class="pilgrim-popup-list-icon" />
+            <span>Sacred temples &amp; shrines</span>
+          </div>
+          <div class="pilgrim-popup-list-item">
+            <img src="travel_list.svg" alt="" class="pilgrim-popup-list-icon" />
+            <span>Curated spiritual itineraries</span>
+          </div>
+        </div>
+        <div class="pilgrim-popup-cta">
+          <a href="pilgrim.html" class="pilgrim-popup-btn">Explore pilgrim</a>
+        </div>
+      </div>
+    </div>
+    <div class="pilgrim-popup-arrow-wrap">
+      <img src="Arrow.svg" alt="" class="pilgrim-popup-arrow" />
+    </div>
+    <a href="pilgrim.html" class="pilgrim-popup-tab">
+      <img src="darshan.svg" alt="" class="pilgrim-popup-tab-icon" />
+      <span>Pilgrim</span>
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+  (function () {
+    var popup = document.getElementById('pilgrimPopup');
+    if (!popup) return;
+
+    setTimeout(function () {
+      popup.removeAttribute('hidden');
+      requestAnimationFrame(function () {
+        popup.classList.add('is-visible');
+      });
+    }, 300);
+
+    var scrim = popup.querySelector('.pilgrim-popup-scrim');
+    var closeBtn = document.getElementById('pilgrimPopupClose');
+    scrim.addEventListener('click', closePopup);
+    if (closeBtn) closeBtn.addEventListener('click', closePopup);
+
+    var slides = popup.querySelectorAll('.pilgrim-popup-slide');
+    var current = 0;
+    var slideInterval = null;
+
+    function nextSlide() {
+      slides[current].classList.remove('is-active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-active');
+    }
+
+    function startSlideshow() {
+      if (slideInterval) return;
+      slideInterval = setInterval(nextSlide, 3500);
+    }
+
+    function stopSlideshow() {
+      clearInterval(slideInterval);
+      slideInterval = null;
+    }
+
+    setTimeout(function () {
+      startSlideshow();
+    }, 600);
+
+    function closePopup() {
+      stopSlideshow();
+      popup.classList.remove('is-visible');
+      popup.addEventListener('transitionend', function handler() {
+        popup.setAttribute('hidden', '');
+        popup.removeEventListener('transitionend', handler);
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

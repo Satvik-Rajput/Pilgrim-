@@ -1,0 +1,1429 @@
+/* Pilgrim – pixel-perfect (Figma 360×800), local assets, scales on all devices */
+:root {
+  --primary: #d63941;
+  --primary-container: #ffdad6;
+  --brand-secondary: #ffd7d2;
+  --success-secondary: #c1f1c4;
+  --text-primary: #1d1d1d;
+  --text-secondary: rgba(29, 29, 29, 0.69);
+  --text-inverse: #fdfdfd;
+  --icon-brand: #d63941;
+  --fill-component: #fff;
+  --fill-component-inverse: #303030;
+  --fill-disabled: #e6e6e6;
+  --stroke-weaker: #e6e6e6;
+  --stroke-strong: #4b4b4b;
+  --border-subtle: #b0b0b0;
+  --text-interactive: #5258e4;
+  /* RTC / Entry points (Figma) */
+  --fill-brand-tertiary: #fde6e5;
+  --fill-success-tertiary: #e2eee3;
+  --fill-success-primary: #007b28;
+  --fill-info-tertiary: #e4ecfd;
+  --background-sunken: #f2f2f8;
+  /* Figma spacing (px) */
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-pill: 999px;
+  --magenta: #c82169;
+  --shadow-1: 0 2px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.08);
+  --shadow-2: 0 4px 8px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.08);
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Figma: 3-value gradient – (1) grey top, (2) grey→white till search CTA ~490px, (3) post white */
+  --page-gradient: linear-gradient(180deg, #E6E6E6 0%, #FFFFFF 61%, #FFFFFF 100%);
+  /* Pixel-perfect at 360px; scale with viewport for larger devices (e.g. 16px at 360 = 4.444vw) */
+  --u4: clamp(3px, 1.11vw, 6px);
+  --u6: clamp(5px, 1.67vw, 9px);
+  --u8: clamp(6px, 2.22vw, 12px);
+  --u10: clamp(8px, 2.78vw, 14px);
+  --u12: clamp(10px, 3.33vw, 16px);
+  --u14: clamp(12px, 3.89vw, 18px);
+  --u16: clamp(14px, 4.44vw, 20px);
+  --u18: clamp(15px, 5vw, 22px);
+  --u20: clamp(16px, 5.56vw, 24px);
+  --u22: clamp(18px, 6.11vw, 26px);
+  --u24: clamp(20px, 6.67vw, 28px);
+  --u28: clamp(22px, 7.78vw, 32px);
+  --u32: clamp(26px, 8.89vw, 38px);
+  --u36: clamp(30px, 10vw, 44px);
+  --u40: clamp(34px, 11.11vw, 48px);
+  --u42: clamp(36px, 11.67vw, 50px);
+  --u48: clamp(40px, 13.33vw, 56px);
+  --u52: clamp(44px, 14.44vw, 60px);
+  --u56: clamp(48px, 15.56vw, 64px);
+  --u60: clamp(52px, 16.67vw, 68px);
+  --u72: clamp(60px, 20vw, 84px);
+  --u92: clamp(76px, 25.56vw, 108px);
+  --u140: clamp(120px, 38.89vw, 160px);
+  --u200: clamp(170px, 55.56vw, 230px);
+  --u296: clamp(260px, 82.22vw, 340px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Figma: page background – subtle vertical gradient (lighter top → slightly darker bottom) */
+body {
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  background: var(--page-gradient);
+  background-attachment: fixed;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Frame: transparent so body gradient shows through (single gradient for whole screen) */
+.phone-frame {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: transparent;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 0 0 1px var(--stroke-weaker);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header – no fixed height; transparent so body gradient shows through */
+.header {
+  padding: 0 16px;
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: 0;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+/* Section 1: Header – Figma pixel-perfect */
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0;
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 8px;
+  background: linear-gradient(to right, var(--primary), var(--magenta));
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-pill);
+  font: 400 12px/16px var(--font-family);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}
+
+.lang-btn-icon,
+.lang-btn-text {
+  flex-shrink: 0;
+}
+
+.lang-btn img {
+  display: block;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 26px;
+  padding: 0 8px;
+  background: var(--fill-component);
+  border: 1px solid var(--stroke-weaker);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-1);
+  cursor: pointer;
+}
+
+.profile-pill img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* Section 2: LoBs – Figma: white cards, 72px height, radius 12, gap 8, label 14px Medium */
+.lobs {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 0 20px;
+}
+
+.lobs::-webkit-scrollbar {
+  display: none;
+}
+
+.lob-item {
+  flex: 1 1 0;
+  min-width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--fill-component);
+  border-radius: var(--radius-12);
+  box-shadow: var(--shadow-1);
+  text-decoration: none;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.lob-item:last-child {
+  flex: 0 0 77.5px;
+}
+
+.lob-icon-wrap {
+  width: 44px;
+  height: 32px;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.lob-item:first-child .lob-icon-wrap {
+  width: 42px;
+}
+
+.lob-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.lob-img-hotel {
+  width: 32px;
+  height: 32px;
+}
+
+.lob-badge {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px;
+  background: var(--fill-component);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.lob-badge-inner {
+  display: block;
+  padding: 0 4px;
+  background: var(--success-secondary);
+  border-radius: var(--radius-pill);
+  font: 700 11px/14px var(--font-family);
+  letter-spacing: 0.05px;
+  color: var(--text-primary);
+}
+
+.lob-label {
+  font: 500 14px/20px var(--font-family);
+  letter-spacing: -0.09px;
+  margin-top: 0;
+}
+
+/* Main – grows with content; transparent so body gradient shows through */
+.main {
+  flex: 1 1 auto;
+  padding: 0 16px;
+  padding-bottom: calc(60px + env(safe-area-inset-bottom) + 24px);
+  background: transparent;
+}
+
+.section-title {
+  font: 700 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+/* Section 3: Search widget – Figma 886:21824 pixel-perfect (328px content, 8/12 gaps, 52/56 rows) */
+.search-widget {
+  width: 100%;
+  padding-bottom: 24px;
+  box-sizing: border-box;
+}
+
+.search-widget .section-title {
+  width: 100%;
+  margin: 0 0 8px;
+  font: 700 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  color: var(--text-primary);
+}
+
+.search-card {
+  width: 100%;
+  background: var(--success-secondary);
+  border-radius: 20px;
+  overflow: visible;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.usp-banner {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 400 12px/16px var(--font-family);
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+  border-radius: 20px 20px 0 0;
+}
+
+.search-fields {
+  background: var(--fill-component);
+  border: 1px solid var(--stroke-weaker);
+  border-radius: 20px;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 52px;
+  min-height: 52px;
+  padding: 16px 24px 16px 16px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Date row: date on one line, buttons extend right; horizontal scroll so user can scroll to see Tomorrow */
+.search-row-date {
+  height: 56px;
+  min-height: 56px;
+  padding: 8px 16px 8px 16px;
+  position: relative;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.search-row-date::-webkit-scrollbar {
+  display: none;
+}
+
+.search-row-date .row-icon,
+.search-row-date .row-labels,
+.search-row-date .date-btns {
+  flex-shrink: 0;
+}
+
+.search-row-date .row-labels {
+  flex: 0 0 auto;
+  min-width: 92px;
+}
+
+.search-row-date .label-small,
+.search-row-date .label-value {
+  white-space: nowrap;
+}
+
+.search-row-date::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 56px;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, #fff 100%);
+  pointer-events: none;
+}
+
+.search-row-woman {
+  height: 52px;
+  min-height: 52px;
+  padding: 12px 12px 12px 16px;
+  background: var(--fill-component);
+  box-shadow: var(--shadow-1);
+  gap: 16px;
+}
+
+.row-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.row-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.label-small {
+  font: 400 12px/16px var(--font-family);
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.label-value {
+  font: 700 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  color: var(--text-primary);
+}
+
+.divider {
+  height: 1px;
+  min-height: 1px;
+  background: var(--stroke-weaker);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Swap (From/To): Figma 886:21857 – top 26px, anchored right so it stays right when screen grows */
+.swap-btn {
+  position: absolute;
+  right: 11px;
+  top: 26px;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background: var(--fill-component-inverse);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.swap-btn img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+.date-btns {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+  align-items: center;
+  min-width: 168px;
+  width: max-content;
+  flex-shrink: 0;
+  padding-right: 16px;
+  box-sizing: content-box;
+}
+
+/* Date pills: Figma 886:21849 (Today) & 886:21854 (Tomorrow) both use fill/brand/secondary #ffd7d2 */
+.pill-btn {
+  height: 48px;
+  min-height: 48px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--brand-secondary);
+  font: 700 14px/20px var(--font-family);
+  letter-spacing: -0.09px;
+  color: var(--text-primary);
+  cursor: pointer;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.pill-btn:first-child {
+  min-width: 74px;
+}
+
+.pill-btn:last-child {
+  min-width: 86px;
+}
+
+.pill-btn:last-child {
+  width: 117px;
+  min-width: 117px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.pill-btn-selected {
+  background: var(--brand-secondary);
+}
+
+.woman-label {
+  flex: 1;
+  font: 500 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  color: var(--text-primary);
+}
+
+.toggle {
+  width: 52px;
+  height: 32px;
+  padding: 4px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--fill-disabled);
+  border: 2px solid var(--stroke-strong);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.toggle[aria-checked="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  justify-content: flex-end;
+}
+
+.toggle[aria-checked="true"] .toggle-puck {
+  background: var(--text-inverse);
+}
+
+.toggle-puck {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-pill);
+  background: #4b4b4b;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-search {
+  width: 100%;
+  height: 48px;
+  padding: 0 20px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  color: var(--text-inverse);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font: 700 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-search-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+}
+
+/* Section 4: Offers – Figma 886:21870 pixel-perfect */
+/* Offers section – Figma 886:21870 */
+.offers {
+  padding-top: 0;
+  padding-bottom: 24px;
+}
+
+.offers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 64px;
+  padding: 12px 0 12px 0;
+  margin-bottom: 0;
+}
+
+.offers-title {
+  font: 700 22px/28px var(--font-family);
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.link-view-more {
+  font: 700 14px/20px var(--font-family);
+  color: var(--text-interactive);
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  letter-spacing: 0;
+  flex-shrink: 0;
+  padding: 0 16px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Android Chips 886:21880 – gap 12px, chip py 8px, min-w 48px, content px 4px py 6px */
+.chips {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-height: 48px;
+  padding: 8px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin-bottom: 0;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 6px 4px;
+  min-height: 32px;
+  min-width: 48px;
+  border-radius: var(--radius-8);
+  border: 1px solid var(--border-subtle);
+  background: var(--fill-component);
+  font: 500 14px/20px var(--font-family);
+  color: var(--text-primary);
+  cursor: pointer;
+  letter-spacing: -0.084px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chip-selected {
+  background: var(--primary-container);
+  border-color: transparent;
+  font-weight: 700;
+}
+
+/* 886:21882 – carousel row pt 8px, px 16px, gap 12px */
+.carousel-wrap {
+  overflow: visible;
+  margin-bottom: 0;
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-top: 8px;
+}
+
+.carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 8px 16px 0;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Android cards 910:7206 – 296×200, p 16px; isolate from scroll so padding isn’t affected */
+.offer-card {
+  flex: 0 0 296px;
+  width: 296px;
+  min-width: 296px;
+  max-width: 296px;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  border-radius: var(--radius-16);
+  position: relative;
+  min-height: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  contain: layout style;
+  isolation: isolate;
+}
+
+.offer-card-inner {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 16px padding wrapper – fixed width so scroll doesn’t change inset */
+.offer-card-pad {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.offer-card-1 {
+  background-image: url('./Background_offer.png');
+  background-size: cover;
+  background-position: center;
+  background-color: #ffe5dc;
+  background-repeat: no-repeat;
+}
+
+.offer-card-2 {
+  background: linear-gradient(180deg, #e4dcec 0%, #f0ebf8 100%);
+  background-color: #e8e0f5;
+}
+
+/* top content 910:7207: badge, 8px gap, then (title 2px subtitle); all in flow so 16px padding applies */
+.offer-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+  z-index: 2;
+  position: relative;
+}
+
+.offer-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 2;
+  position: relative;
+  min-height: 0;
+}
+
+.offer-card-body .card-validity {
+  margin-top: 10px;
+}
+
+/* DroidTag 910:7209 – in flow so respects card 16px padding; px 4px per Figma */
+.card-badge {
+  height: 24px;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  background: rgba(29, 29, 29, 0.6);
+  color: #fcfcfc;
+  border-radius: var(--radius-8);
+  font: 500 12px/16px var(--font-family);
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.card-deal {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  min-width: 56px;
+  height: 24px;
+  padding: 0 8px;
+  background: var(--primary);
+  color: var(--text-inverse);
+  border-radius: var(--radius-pill);
+  font: 700 10px/24px var(--font-family);
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.card-deal-reddeal {
+  background: transparent;
+  color: var(--primary);
+  font: 700 14px/20px var(--font-family);
+  letter-spacing: -0.084px;
+  padding: 0;
+  min-width: 0;
+  height: auto;
+  gap: 8px;
+}
+
+.card-deal-reddeal img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font: 700 16px/24px var(--font-family);
+  letter-spacing: -0.176px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-subtitle {
+  font: 500 14px/20px var(--font-family);
+  letter-spacing: -0.084px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-title-2line {
+  font: 700 22px/28px var(--font-family);
+  letter-spacing: -0.4px;
+  margin-bottom: 0;
+}
+
+.card-subtitle-2line {
+  font: 400 16px/24px var(--font-family);
+  letter-spacing: -1.1px;
+}
+
+.card-validity {
+  font: 400 12px/16px var(--font-family);
+  color: var(--text-primary);
+  margin-top: 0;
+}
+
+/* DroidButtonsCommon 910:7217 – h 48px, gap 4px, px 12px py 4px, white fill, pill; left-aligned in card */
+.card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 48px;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 4px 12px;
+  background: var(--fill-component);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-pill);
+  font: 700 14px/20px var(--font-family);
+  letter-spacing: -0.084px;
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.card-cta img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* DroidCarousel pagination 23:11661 – gap 4px, selected puck 40×20, unselected 8px */
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 24px;
+  margin-top: 16px;
+  padding: 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--stroke-weaker);
+  flex-shrink: 0;
+}
+
+.dot-active {
+  min-width: 40px;
+  width: 40px;
+  height: 20px;
+  padding: 0 6px;
+  background: var(--primary);
+  color: var(--text-inverse);
+  font: 500 12px/16px var(--font-family);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-20);
+}
+
+/* RTC Section – Figma 886:21887 Government buses (same pattern as Offers) */
+.rtc-section {
+  padding: 0 0 24px;
+}
+.rtc-section-title {
+  font: 700 22px/28px var(--font-family);
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+  min-height: 64px;
+  padding: 12px 0 12px 16px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.rtc-cards-wrap {
+  margin-left: -16px;
+  margin-right: -16px;
+  overflow: visible;
+}
+.rtc-cards {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px 4px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.rtc-cards::-webkit-scrollbar {
+  display: none;
+}
+.rtc-card {
+  flex: 0 0 296px;
+  width: 296px;
+  background: var(--fill-brand-tertiary);
+  border-radius: var(--radius-16);
+  box-shadow: var(--shadow-2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.rtc-card-inner {
+  background: var(--fill-component);
+  border-radius: var(--radius-16);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+.rtc-card-top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--stroke-weaker);
+}
+.rtc-logo {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-8);
+  background: var(--fill-brand-tertiary);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.rtc-name-block {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+}
+.rtc-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rtc-name {
+  font: 700 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  color: var(--text-primary);
+}
+.rtc-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--fill-success-primary);
+  color: var(--text-inverse);
+  border-radius: 6px;
+  font: 500 12px/16px var(--font-family);
+}
+.rtc-rating-star {
+  font-size: 12px;
+  line-height: 1;
+}
+.rtc-subtitle {
+  font: 500 14px/20px var(--font-family);
+  letter-spacing: -0.09px;
+  color: var(--text-secondary);
+}
+.rtc-services {
+  font: 400 14px/20px var(--font-family);
+  letter-spacing: -0.09px;
+  color: var(--text-primary);
+  padding: 0 6px 0 0;
+  margin: 0;
+}
+.rtc-nudge {
+  background: var(--fill-info-tertiary);
+  padding: 12px;
+  border-radius: 32px;
+  margin-top: 0;
+}
+.rtc-nudge-text {
+  font: 400 14px/20px var(--font-family);
+  color: var(--text-primary);
+  letter-spacing: -0.09px;
+}
+.rtc-nudge-text strong {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+.rtc-partner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--background-sunken);
+  padding: 8px;
+  border-radius: var(--radius-8);
+  margin-top: 16px;
+  width: 100%;
+  max-width: 264px;
+}
+.rtc-partner-logo {
+  flex-shrink: 0;
+  height: 16px;
+  width: auto;
+}
+.rtc-partner span {
+  font: 500 12px/16px var(--font-family);
+  letter-spacing: 0.01px;
+  color: var(--text-primary);
+}
+.rtc-tag {
+  background: var(--fill-brand-tertiary);
+  padding: 4px;
+  text-align: center;
+  font: 700 12px/16px var(--font-family);
+  letter-spacing: 0.01px;
+  color: var(--text-primary);
+  border-radius: 0 0 var(--radius-16) var(--radius-16);
+}
+
+/* Entry points – Figma 886:21888 (same padding as other sections) */
+.entry-points {
+  padding: 0 0 20px;
+  box-sizing: border-box;
+}
+.entry-points-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.entry-point {
+  flex: 0 0 76px;
+  width: 76px;
+  height: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  background: var(--fill-component);
+  border: 1px solid var(--stroke-weaker);
+  border-radius: var(--radius-12);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+.entry-point-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.entry-point-label {
+  font: 400 12px/16px var(--font-family);
+  text-align: center;
+  letter-spacing: 0.01px;
+  line-height: 1.2;
+}
+
+/* Section 5: Bottom nav – Figma: 60px height, 5 tabs, 12px label, 24px icon */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: calc(60px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 4px;
+  padding-right: 4px;
+  box-shadow: 0 -1px 0 var(--stroke-weaker);
+  box-sizing: border-box;
+  z-index: 1000;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.nav-tab {
+  flex: 1;
+  max-width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  min-height: 48px;
+  text-decoration: none;
+  color: var(--text-primary);
+  font: 400 12px/16px var(--font-family);
+  letter-spacing: 0.01em;
+}
+
+.nav-tab-active {
+  color: var(--icon-brand);
+  font-weight: 500;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Active icon: tint to brand red #d63941 */
+.nav-tab-active .nav-icon {
+  filter: brightness(0) saturate(100%) invert(28%) sepia(63%) saturate(2476%) hue-rotate(338deg) brightness(91%) contrast(93%);
+}
+
+/* Non-active icons: tint to dark grey */
+.nav-tab:not(.nav-tab-active) .nav-icon {
+  filter: brightness(0) saturate(100%) invert(12%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(90%);
+  opacity: 0.7;
+}
+
+@media (min-width: 380px) {
+  .phone-frame {
+    box-shadow: var(--shadow-2);
+  }
+}
+
+@media (max-width: 320px) {
+  .lob-item {
+    min-width: 68px;
+  }
+  .offer-card {
+    min-width: 220px;
+  }
+}
+
+/* ── Pilgrim intro popup ── */
+.pilgrim-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.pilgrim-popup-overlay.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pilgrim-popup-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(29, 29, 29, 0.8);
+}
+
+.pilgrim-popup-spacer {
+  flex: 1;
+  min-height: 0;
+  z-index: 1;
+}
+
+.pilgrim-popup-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  width: 330px;
+  max-width: calc(100% - 30px);
+  flex-shrink: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.pilgrim-popup-overlay.is-visible .pilgrim-popup-container {
+  transform: translateY(0);
+}
+
+.pilgrim-popup-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pilgrim-popup-hero {
+  position: relative;
+  width: 100%;
+  height: 177px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.pilgrim-popup-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.pilgrim-popup-slide.is-active {
+  opacity: 1;
+}
+
+.pilgrim-popup-slide .pilgrim-popup-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 3.5s ease;
+}
+
+.pilgrim-popup-slide.is-active .pilgrim-popup-hero-img {
+  transform: scale(1.05);
+}
+
+.pilgrim-popup-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 68.933%),
+    linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 70.523%);
+}
+
+.pilgrim-popup-hero-text {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  right: 16px;
+  font: 700 20px/26px var(--font-family);
+  letter-spacing: -0.33px;
+  color: #fff;
+  margin: 0;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+}
+
+.pilgrim-popup-slide.is-active .pilgrim-popup-hero-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pilgrim-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.pilgrim-popup-close::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.pilgrim-popup-close-x {
+  position: relative;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+}
+
+.pilgrim-popup-text {
+  padding: 16px 16px 4px;
+}
+
+.pilgrim-popup-greeting {
+  font: 500 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  color: #1d1d1d;
+  margin: 0;
+}
+
+.pilgrim-popup-headline {
+  font: 700 22px/28px var(--font-family);
+  letter-spacing: -0.4px;
+  color: #1d1d1d;
+  margin: 0;
+}
+
+.pilgrim-popup-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.pilgrim-popup-list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 40px;
+  padding: 8px 16px;
+  font: 500 16px/22px var(--font-family);
+  letter-spacing: -0.18px;
+  color: #1d1d1d;
+}
+
+.pilgrim-popup-list-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.pilgrim-popup-cta {
+  padding: 8px 16px 16px;
+}
+
+.pilgrim-popup-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  background: #d63941;
+  border-radius: 999px;
+  font: 700 16px/24px var(--font-family);
+  letter-spacing: -0.18px;
+  color: #fdfdfd;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  box-sizing: border-box;
+}
+
+.pilgrim-popup-arrow-wrap {
+  flex: 1;
+  min-height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  padding: 4px 0;
+}
+
+.pilgrim-popup-arrow {
+  width: 20px;
+  height: 100%;
+  max-height: 160px;
+}
+
+.pilgrim-popup-tab {
+  flex-shrink: 0;
+  z-index: 1;
+  width: 68px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: #fff;
+  border-radius: 16px;
+  text-decoration: none;
+  padding: 8px 0;
+  box-sizing: border-box;
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.pilgrim-popup-tab-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.pilgrim-popup-tab span {
+  font: 400 12px/16px var(--font-family);
+  letter-spacing: 0.01px;
+  color: #1d1d1d;
+  text-align: center;
+}
